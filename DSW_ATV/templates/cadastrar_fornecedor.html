@@ -1,0 +1,14 @@
+<h1>Cadastrar Fornecedor</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="id_nome_fornecedor">Nome:</label>
+    <input type="text" id="id_nome_fornecedor" placeholder="Nome do Fornecedor">
+    <br>
+    <label for="id_cod_fornecedor">Cod do Fornecedor:</label>
+    <input type="text" id="id_cod_fornecedor" placeholder="Código do Fornecedor">
+    <br>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<a href="{% url 'index' %}">Voltar</a>

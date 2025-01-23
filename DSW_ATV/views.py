@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .forms import QuestionForm
+from django.shortcuts import render, redirect
+from .forms import QuestionForm, FornecedorForm
 from .models import *
 
 def index(request):
@@ -36,3 +36,14 @@ def listar_fornecedores(request):
         'fornecedores': fornecedores
         }
     return render(request, 'listar_fornecedores.html', context)
+
+def cadastrar_fornecedor(request):
+    if request.method == 'POST':
+        form = FornecedorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return(redirect('listar_fornecedores'))
+    else:
+        form = FornecedorForm()
+
+    return render(request, 'cadastrar_fornecedor.html', {'form':form})

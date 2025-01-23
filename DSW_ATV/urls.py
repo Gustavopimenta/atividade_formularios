@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:question_id>', views.detalhes, name='detail'),
     path('categorias/', views.listar_categorias, name='listar_categorias'),
     path('fornecedores/', views.listar_fornecedores, name='listar_fornecedores'),
+    path('cadastrar_fornecedor/', views.cadastrar_fornecedor, name='cadastrar_fornecedores'),
 ]
