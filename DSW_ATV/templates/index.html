@@ -1,1 +1,11 @@
 <h1>Models</h1>
+
+{% for produto in produtos %}
+    <h2><a href="/{{ produto.id }}">{{ produto.nome_produto }}</a></h2>
+{% endfor %}
+
+<a href="{% url 'listar_categorias' %}">Ir as Categorias</a> 
+<br>
+<a href="{% url 'listar_fornecedores' %}">Ir os Fornecedores</a>
+<br>
+<a href="{% url 'create' %}">Criar enquete</a>
