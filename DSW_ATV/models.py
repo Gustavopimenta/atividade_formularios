@@ -29,7 +29,7 @@ class Produto(models.Model):
     qntd_estoque = models.IntegerField(null=False, blank=False)
     data_criacao = models.DateField(auto_now_add=True) 
     categorias = models.ManyToManyField(Categoria)
-    fornecer = models.ForeignKey(Fornecedor, on_delete=models.CASCADE, default=1)
+    fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.nome_produto

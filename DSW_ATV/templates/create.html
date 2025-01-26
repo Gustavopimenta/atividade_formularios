@@ -1,9 +1,0 @@
-<h1>Criar nova enquete</h1>
-<form action="{% url 'create' %}" method="post">
-      {%csrf_token%}
-      {{form}}
-      <button type="submit">Criar</button>
-</form>
-
-
-<a href="{% url 'index' %}">Voltar</a>

@@ -1,13 +1,34 @@
-<h1>Models</h1>
+{% extends 'global/base.html' %}
 
-{% for produto in produtos %}
-    <h2><a href="/{{ produto.id }}">{{ produto.nome_produto }}</a></h2>
-{% endfor %}
+{% block title %}Index{% endblock %}
 
-<a href="{% url 'listar_categorias' %}">Ir as Categorias</a> 
-<br>
-<a href="{% url 'listar_fornecedores' %}">Ir os Fornecedores</a>
-<br>
-<a href="{% url 'create' %}">Criar enquete</a>
-<br>
-<a href="{% url 'cadastrar_fornecedores' %}">Cadastrar Fornecedor</a>   
+{% block content %}
+    <h1 class="h1-produto">Produtos</h1>
+
+    <div class="produto-grid">
+        {% for produto in produto %}
+        <div class="produto-item">
+            <h3>{{ produto.nome_produto }}</h3>
+            <p><strong>Código:</strong> {{ produto.cod_produto }}</p>
+            <p><strong>Preço:</strong> R${{ produto.preco }}</p>
+            <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+            <p><strong>Quantidade em Estoque:</strong> {{ produto.qntd_estoque }}</p>
+            <p><strong>Categoria:</strong>{% for categoria in produto.categorias.all %} 
+                {{ categoria.nome_categoria }}{% if not forloop.last %}, 
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>Fornecedor:</strong> {{ produto.fornecedor }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="btn-grid">
+        <a href="{% url 'cadastrar_categoria' %}" class="btn">Cadastrar     Categoria</a>
+        <a href="{% url 'listar_categorias' %}" class="btn">Listar Categorias</a>
+        <a href="{% url 'cadastrar_fornecedores' %}" class="btn">Cadastrar  Fornecedor</a>
+        <a href="{% url 'listar_fornecedores' %}" class="btn">Listar    Fornecedores</a>
+        <a href="{% url 'cadastrar_produto' %}" class="btn">Cadastrar Produto</a>
+    </div>  
+
+{% endblock  %}
