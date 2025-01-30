@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import QuestionForm, FornecedorForm, CategoriaForm, ProdutoForm
-import datetime
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from .models import *
 
 def index(request):

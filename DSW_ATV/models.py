@@ -1,4 +1,5 @@
 from django.db import models
+from .validators import validate_price, validate_stock, validate_code, validate_lenght
 
 class Categoria(models.Model):
     nome_categoria = models.CharField(max_length=255, null=False, blank=False, verbose_name="Nome da Categoria")
@@ -22,11 +23,11 @@ class Question(models.Model):
         return self.question_text
 
 class Produto(models.Model):
-    nome_produto = models.CharField(max_length=255, null=False, blank=False)
-    cod_produto = models.CharField(max_length=100, unique=True, blank=False, null=False)
+    nome_produto = models.CharField(max_length=255, null=False, blank=False, validators=[validate_lenght])
+    cod_produto = models.CharField(max_length=100, unique=True, blank=False, null=False, validators=[validate_code])
     descricao = models.TextField(null=True, blank=True)
-    preco = models.DecimalField(max_digits=10, decimal_places=2)
-    qntd_estoque = models.IntegerField(null=False, blank=False)
+    preco = models.DecimalField(max_digits=10, decimal_places=2, validators=[validate_price])
+    qntd_estoque = models.IntegerField(null=False, blank=False, validators=[validate_stock])
     data_criacao = models.DateField(auto_now_add=True) 
     categorias = models.ManyToManyField(Categoria)
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE, default=1)

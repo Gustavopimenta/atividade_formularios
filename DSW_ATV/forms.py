@@ -1,5 +1,6 @@
 from django import forms
 from .models import Categoria, Fornecedor, Question, Produto
+from .validators import validate_price, validate_stock, validate_code, validate_lenght
 
 class QuestionForm(forms.Form):
    question_text = forms.CharField(label="Enquete")
@@ -23,6 +24,8 @@ class CategoriaForm(forms.ModelForm):
       }
 
 class ProdutoForm(forms.ModelForm):
+   validators=[validate_price, validate_stock, validate_code, validate_lenght]
+   
    class Meta:
       model = Produto
       fields = ['nome_produto', 'cod_produto', 'descricao', 'preco', 'qntd_estoque', 'categorias', 'fornecedor']
@@ -31,7 +34,8 @@ class ProdutoForm(forms.ModelForm):
          'cod_produto': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Informe o codigo do produto'}),
          'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Informe a Descrição do produto'}),
          'preco': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Informe o preço do produto', 'step': '0.01'}),
-         'qntd_estoque': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Informe a quantidade em estoque'}),
+         'qntd_estoque': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Informe a quantidade em estoque', 'step': '1'}),
          'categorias': forms.CheckboxSelectMultiple(attrs={'class': 'form-control'}),
          'fornecedor': forms.Select(attrs={'class': 'form-control'}),
       }
+
