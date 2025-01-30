@@ -2,12 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import QuestionForm, FornecedorForm, CategoriaForm, ProdutoForm
 from .models import *
 
-def index(request):
-    produto = Produto.objects.all()
-    context = {
-        'produto': produto
-    }
-    return render(request, 'index.html', context)
+# CBV teste
+
+from django.views.generic import ListView
+from .models import Produto, Categoria, Fornecedor
+
+class ProdutoListView(ListView):
+    model = Produto
+    template_name = "produtos/index.html"
+    context_object_name = "produto"
+
+class CategoriaListView(ListView):
+    model = Categoria
+    template_name = "produtos/listar_categoria"
+    context_object_name = "categorias"
+
+class FornecedorListView(ListView):
+    model = Fornecedor
+    template_name = "produtos/listar_fornecedores.html"
+    context_object_name = "fornecedores"
 
 def detalhes(request, pk):
     detalhes_produto = get_object_or_404(Produto, id=pk)
@@ -15,11 +28,6 @@ def detalhes(request, pk):
         'produtos': detalhes_produto 
     }
     return render(request, 'detalhes_produtos.html', context)
-
-def listar_categorias(request):
-    categorias = Categoria.objects.all()
-    context = {'categorias': categorias}
-    return render(request, 'listar_categorias.html', context)
 
 def cadastrar_categoria(request):
     if request.method == 'POST':
@@ -30,13 +38,6 @@ def cadastrar_categoria(request):
     else:
         form = CategoriaForm()
     return render(request, 'cadastrar_categoria.html', {'form': form})
-
-def listar_fornecedores(request):
-    fornecedores = Fornecedor.objects.all()
-    context = {
-        'fornecedores': fornecedores
-        }
-    return render(request, 'listar_fornecedores.html', context)
 
 def cadastrar_fornecedor(request):
     if request.method == 'POST':
