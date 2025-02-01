@@ -1,9 +1,0 @@
-<h1>Fornecedores:</h1>
-
-{% for fornecedor in fornecedores %}
-    <p>{{ fornecedor.id }} - {{ fornecedor.nome_fornecedor }}</p>
-{% endfor %}
-
-<a href="{% url 'cadastrar_fornecedores' %}">Cadastrar um novo Fornecedor</a>
-<br>
-<a href="{% url 'index' %}">Voltar</a>

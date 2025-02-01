@@ -1,9 +1,0 @@
-{% if error_message %}
-  <p>{{ error_message }}</p>
-{% else %}
-  <!-- Exiba os detalhes do produto -->
-  <h1>{{ produtos.nome_produto }}</h1>
-  <h2>Preço: {{ produtos.preco }}</h2>
-{% endif %}
-
-<a href="{% url 'index' %}">Voltar</a>
